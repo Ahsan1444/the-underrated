@@ -65,3 +65,54 @@ class FileProcessor:
     def display_success(self): # Displays success message"""
         return "File processed successfully!"
 
+class AdvancedFileProcessor(FileProcessor): # Child class with extra functionality
+    def __init__(self, filename, encoding='utf-8'):
+        super().__init__(filename)
+        self.encoding = encoding
+
+    def read_file(self): #Reads the file with a specific encoding
+        with open(self.filename, 'r', encoding=self.encoding) as file:
+            for line in file:
+                yield line.strip()
+
+    def concat_files(self, other_filename, output_filename): # Override method to add separator when merging files
+        with open(self.filename, 'r', encoding=self.encoding) as f1, \
+             open(other_filename, 'r', encoding=self.encoding) as f2, \
+             open(output_filename, 'w', encoding=self.encoding) as out:
+            out.writelines(f1.readlines() + ["\n---MERGED---\n"] + f2.readlines())
+
+        print("\033[92mAdvanced merging completed with separator.\033[0m")
+
+
+if __name__ == "__main__":
+    # Initialize FileProcessors class for both files - Custom Object creation
+    fp1 = FileProcessor("sample1.txt")
+    fp2 = FileProcessor("sample2.txt")
+
+    # Read sample1.txt using generator and print with colors
+    print("\033[94mReading sample1.txt:\033[0m\n")
+    for line in fp1.read_file():
+        print(f"\033[94m{line}\033[0m")  # Print in blue
+    print("\n")
+
+    # Read sample2.txt using generator and print with colors
+    print("\033[96mReading sample2.txt:\033[0m\n")  # Cyan color
+    for line in fp2.read_file():
+        print(f"\033[96m{line}\033[0m")  # Print in cyan
+    print("\n")
+
+    # Concatenate files WITHOUT colors in output.txt
+    fp1.concat_files("sample2.txt", "output.txt")
+    print('\n')
+
+    # Read and print output.txt with colors
+    print("\033[93mReading output.txt (Merged Content):\033[0m\n")  # Yellow color
+    fp_out = FileProcessor("output.txt")
+    for line in fp_out.read_file():
+        print(f"\033[93m{line}\033[0m")  # Print in yellow
+        #print("\033[93m",line,"\033[0m")
+
+    print("\n")
+
+    # Display success message in green
+    print(fp1.display_success())
