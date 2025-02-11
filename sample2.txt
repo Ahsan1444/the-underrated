@@ -1,0 +1,5 @@
+Welcome to Sample 2.
+This is another test file.
+The goal is to concatenate multiple files.
+This should be merged with Sample 1.
+End of Sample 2.

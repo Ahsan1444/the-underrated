@@ -1,0 +1,5 @@
+Hello, this is Sample 1.
+This file contains some sample text.
+It is used for testing the file processor.
+Each line represents a new entry.
+End of Sample 1.

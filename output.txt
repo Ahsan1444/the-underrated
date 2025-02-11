@@ -1,0 +1,10 @@
+Hello, this is Sample 1.
+This file contains some sample text.
+It is used for testing the file processor.
+Each line represents a new entry.
+End of Sample 1.
+Welcome to Sample 2.
+This is another test file.
+The goal is to concatenate multiple files.
+This should be merged with Sample 1.
+End of Sample 2.
